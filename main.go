@@ -4,25 +4,32 @@ package main
 import "bufio"
 import "fmt"
 import "os"
+import "strings"
 
+// Write the prompt to the screen.
 func prompt() {
 	prompt := "pat@swish$ "
 
 	fmt.Print(prompt)
 }
 
-func readInput(stdin *bufio.Reader) {
+// Read user input until newline is entered.
+func readInput(stdin *bufio.Reader) []string {
 	input, _ := stdin.ReadString('\n')
 
-	fmt.Printf("user input: %s", input)
+	// Remove the trailing newline.
+	return strings.Split(input[:len(input) - 1], " ")
 }
 
+// The main loop of the swish shell.
 func swishLoop() {
 	stdin := bufio.NewReader(os.Stdin)
 
 	for {
 		prompt()
-		readInput(stdin)
+		command := readInput(stdin)
+
+		fmt.Println("--user input:", command)
 	}
 }
 
