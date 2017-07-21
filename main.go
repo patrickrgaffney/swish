@@ -4,9 +4,11 @@ package main
 import "bufio"
 import "fmt"
 import "os"
+import "os/exec"
 import "strings"
+import "syscall"
 
-// Write the prompt to the screen.
+// Write the (hardcoded) prompt to the screen.
 func prompt() {
 	prompt := "pat@swish$ "
 
@@ -21,15 +23,30 @@ func readInput(stdin *bufio.Reader) []string {
 	return strings.Split(input[:len(input) - 1], " ")
 }
 
+func execute(cmd []string) {
+	// Make sure the cmd exists in the $PATH.
+	binary, pathErr := exec.LookPath(cmd[0])
+	if pathErr != nil {
+		panic(pathErr)
+	}
+
+	// Fork and execute our program.
+	execErr := syscall.Exec(binary, cmd, os.Environ())
+	if execErr != nil {
+		panic(execErr)
+	}
+}
+
 // The main loop of the swish shell.
 func swishLoop() {
 	stdin := bufio.NewReader(os.Stdin)
 
 	for {
 		prompt()
-		command := readInput(stdin)
+		cmd := readInput(stdin)
 
-		fmt.Println("--user input:", command)
+		fmt.Println("--user input:", cmd)
+		execute(cmd)
 	}
 }
 
