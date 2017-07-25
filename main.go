@@ -26,7 +26,8 @@ func execute(program []string) {
 	// Make sure the cmd exists in the $PATH.
 	_, pathErr := exec.LookPath(program[0])
 	if pathErr != nil {
-		panic(pathErr)
+		fmt.Println(pathErr.Error())
+		return
 	}
 
 	// Initialize and execute the command.
@@ -53,8 +54,19 @@ func swishLoop() {
 		prompt()
 		cmd := readInput(stdin)
 
-		fmt.Println("--user input:", cmd)
-		execute(cmd)
+		fmt.Println("--swish:", cmd)
+
+		if cmd[0] == "cd" {
+			change_dir(cmd[1])
+		} else {
+			execute(cmd)
+		}
+	}
+}
+
+func change_dir(dir string) {
+	if e := os.Chdir(dir); e != nil {
+		fmt.Println(e.Error())
 	}
 }
 
