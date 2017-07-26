@@ -48,13 +48,24 @@ func execute(program []string) {
 
 // The main loop of the swish shell.
 func swishLoop() {
+	show := func(key string) {
+		val, ok := os.LookupEnv(key)
+		if !ok {
+			fmt.Printf("%s not set\n", key)
+		} else {
+			fmt.Printf("%s=%s\n", key, val)
+		}
+	}
+
 	stdin := bufio.NewReader(os.Stdin)
 
 	for {
 		prompt()
 		cmd := readInput(stdin)
 
-		fmt.Println("--swish:", cmd)
+		fmt.Print("--swish: PWD:")
+		show("PWD")
+		fmt.Println("--swish: CMD:", cmd)
 
 		if cmd[0] == "cd" {
 			change_dir(cmd[1])
@@ -71,6 +82,5 @@ func change_dir(dir string) {
 }
 
 func main() {
-
 	swishLoop()
 }
