@@ -6,6 +6,7 @@ import "fmt"
 import "os"
 import "os/exec"
 import "strings"
+import "github.com/patrickrgaffney/swish/builtins"
 
 // Write the (hardcoded) prompt to the screen.
 func prompt() {
@@ -48,36 +49,19 @@ func execute(program []string) {
 
 // The main loop of the swish shell.
 func swishLoop() {
-	show := func(key string) {
-		val, ok := os.LookupEnv(key)
-		if !ok {
-			fmt.Printf("%s not set\n", key)
-		} else {
-			fmt.Printf("%s=%s\n", key, val)
-		}
-	}
-
 	stdin := bufio.NewReader(os.Stdin)
 
 	for {
 		prompt()
 		cmd := readInput(stdin)
 
-		fmt.Print("--swish: PWD:")
-		show("PWD")
 		fmt.Println("--swish: CMD:", cmd)
 
 		if cmd[0] == "cd" {
-			change_dir(cmd[1])
+			builtins.Cd(cmd[1])
 		} else {
 			execute(cmd)
 		}
-	}
-}
-
-func change_dir(dir string) {
-	if e := os.Chdir(dir); e != nil {
-		fmt.Println(e.Error())
 	}
 }
 
