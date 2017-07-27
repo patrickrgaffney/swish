@@ -23,6 +23,19 @@ func readInput(stdin *bufio.Reader) []string {
 	return strings.Split(input[:len(input)-1], " ")
 }
 
+func parseInput(cmd []string) {
+	switch (cmd[0]) {
+	case "cd":
+		builtins.Cd(cmd[1])
+	case "pwd":
+		builtins.Pwd()
+	case "exit":
+		builtins.Exit(0)
+	default:
+		execute(cmd)
+	}
+}
+
 func execute(program []string) {
 	// Make sure the cmd exists in the $PATH.
 	_, pathErr := exec.LookPath(program[0])
@@ -54,18 +67,7 @@ func swishLoop() {
 	for {
 		prompt()
 		cmd := readInput(stdin)
-
-		fmt.Println("--swish: CMD:", cmd)
-
-		if cmd[0] == "cd" {
-			builtins.Cd(cmd[1])
-		} else if cmd[0] == "pwd" {
-			builtins.Pwd()
-		} else if cmd[0] == "exit" {
-			builtins.Exit(0)
-		} else {
-			execute(cmd)
-		}
+		parseInput(cmd)
 	}
 }
 
