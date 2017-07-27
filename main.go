@@ -31,6 +31,8 @@ func parseInput(cmd []string) {
 		builtins.Pwd()
 	case "exit":
 		builtins.Exit(0)
+	case "help":
+		builtins.Help()
 	default:
 		execute(cmd)
 	}
