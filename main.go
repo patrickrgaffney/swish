@@ -20,7 +20,7 @@ func readInput(stdin *bufio.Reader) []string {
 	input, _ := stdin.ReadString('\n')
 
 	// Remove the trailing newline.
-	return strings.Split(input[:len(input) - 1], " ")
+	return strings.Split(input[:len(input)-1], " ")
 }
 
 func execute(program []string) {
@@ -33,7 +33,7 @@ func execute(program []string) {
 
 	// Initialize and execute the command.
 	cmd := exec.Command(program[0], program[1:]...)
-	cmd.Stdin = os.Stdin
+	cmd.Stdin  = os.Stdin
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	if err := cmd.Run(); err != nil {
