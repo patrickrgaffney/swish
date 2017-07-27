@@ -61,6 +61,8 @@ func swishLoop() {
 			builtins.Cd(cmd[1])
 		} else if cmd[0] == "pwd" {
 			builtins.Pwd()
+		} else if cmd[0] == "exit" {
+			builtins.Exit(0)
 		} else {
 			execute(cmd)
 		}
