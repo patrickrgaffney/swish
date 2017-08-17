@@ -42,7 +42,7 @@ func execute(program []string) {
 	// Make sure the cmd exists in the $PATH.
 	_, pathErr := exec.LookPath(program[0])
 	if pathErr != nil {
-		fmt.Println(pathErr.Error())
+		fmt.Fprintf(os.Stderr, "swish: '%s': command not in $PATH\n", program[0])
 		return
 	}
 
@@ -54,12 +54,6 @@ func execute(program []string) {
 	if err := cmd.Run(); err != nil {
 		panic(err)
 	}
-
-	// Fork and execute our program.
-	// execErr := syscall.Exec(binary, cmd, os.Environ())
-	// if execErr != nil {
-	// 	panic(execErr)
-	// }
 }
 
 // The main loop of the swish shell.
