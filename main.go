@@ -51,8 +51,12 @@ func execute(program []string) {
 	cmd.Stdin  = os.Stdin
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
+
 	if err := cmd.Run(); err != nil {
-		panic(err)
+		// Only log errors that cannot be promoted to *ExitError.
+		if _, ok := err.(*exec.ExitError); !ok {
+            fmt.Fprintf(os.Stderr, "%s\n", err.Error())
+        }
 	}
 }
 
