@@ -33,6 +33,12 @@ func parseInput(cmd []string) {
 		builtins.Exit(0)
 	case "help":
 		builtins.Help()
+	case "alias":
+		if len(cmd) > 1 {
+			builtins.Alias(cmd[1:])
+		} else {
+			builtins.Alias([]string{})
+		}
 	default:
 		execute(cmd)
 	}
