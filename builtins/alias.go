@@ -6,12 +6,17 @@ import "strings"
 
 var aliases = make(map[string]string)
 
+func LookUpAlias(name string) (string, bool) {
+    alias, ok := aliases[name]
+    return alias, ok
+}
+
 func Alias(operands []string) {
     // Either list all aliases, add one, or print a single alias.
     if len(operands) > 0 {
         alias := strings.SplitN(operands[0], "=", 2)
 
-        // Add an alias.
+        // Add an alias if multiple values [alias, value], or perform lookup.
         if len(alias) > 1 {
             aliases[alias[0]] = alias[1]
         } else {
@@ -26,9 +31,4 @@ func Alias(operands []string) {
             fmt.Printf("alias '%s'='%s'\n", alias, value)
         }
     }
-}
-
-func LookUpAlias(name string) (string, bool) {
-    alias, ok := aliases[name]
-    return alias, ok
 }
