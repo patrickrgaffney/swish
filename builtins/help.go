@@ -3,7 +3,7 @@ package builtins
 import "fmt"
 
 func Help() {
-    const help string = `                         /$$           /$$
+	const help string = `                         /$$           /$$
                         |__/          | $$
   /$$$$$$$ /$$  /$$  /$$ /$$  /$$$$$$$| $$$$$$$
  /$$_____/| $$ | $$ | $$| $$ /$$_____/| $$__  $$
@@ -27,5 +27,5 @@ Created with some lowpost moves and golang by
 Pat Gaffney <pat@hypepat.com>
 `
 
-    fmt.Print(help)
+	fmt.Print(help)
 }

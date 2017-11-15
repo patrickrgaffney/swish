@@ -24,7 +24,7 @@ func readInput(stdin *bufio.Reader) []string {
 }
 
 func parseInput(cmd []string) {
-	switch (cmd[0]) {
+	switch cmd[0] {
 	case "cd":
 		builtins.Cd(cmd[1])
 	case "pwd":
@@ -54,15 +54,15 @@ func execute(program []string) {
 
 	// Initialize and execute the command.
 	cmd := exec.Command(program[0], program[1:]...)
-	cmd.Stdin  = os.Stdin
+	cmd.Stdin = os.Stdin
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 
 	if err := cmd.Run(); err != nil {
 		// Only log errors that cannot be promoted to *ExitError.
 		if _, ok := err.(*exec.ExitError); !ok {
-            fmt.Fprintf(os.Stderr, "%s\n", err.Error())
-        }
+			fmt.Fprintf(os.Stderr, "%s\n", err.Error())
+		}
 	}
 }
 
