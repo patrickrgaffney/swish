@@ -6,7 +6,8 @@ import "fmt"
 import "os"
 import "os/exec"
 import "strings"
-import "builtins"
+
+import "github.com/patrickrgaffney/swish/builtins"
 
 // Write the (hardcoded) prompt to the screen.
 func prompt() {
