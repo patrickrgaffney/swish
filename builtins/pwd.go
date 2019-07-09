@@ -3,8 +3,8 @@ package builtins
 import "fmt"
 import "os"
 
-// Look into returning the cached value in $PWD if it exists, otherwise
-// make the os.Getwd() call --- which may take a long time.
+// TODO: Look into returning the cached value in $PWD if it exists,
+// otherwise make the os.Getwd() call --- which may take a long time.
 func Pwd() {
 	wd, err := os.Getwd()
 	if err != nil {
