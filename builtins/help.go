@@ -23,7 +23,7 @@ builtins:
     exit    exit the shell
     help    print this message
 
-Created with some lowpost moves and golang by 
+Created with no midrange game and golang by 
 Pat Gaffney <pat@hypepat.com>
 `
 
