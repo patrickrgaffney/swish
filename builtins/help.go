@@ -13,7 +13,7 @@ func Help() {
 |_______/  \_____/\___/ |__/|_______/ |__/  |__/
 
 swish, version: 0.0.1
-the james-harden-from-the-free-throw-line shell
+the james-harden-from-three shell
 
 usage: swish
 

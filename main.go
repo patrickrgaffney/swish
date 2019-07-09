@@ -1,4 +1,4 @@
-// Swish: the james-harden-from-the-free-throw-line shell
+// Swish: the james-harden-from-three shell
 package main
 
 import "bufio"

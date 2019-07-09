@@ -1,6 +1,6 @@
 # swish
 
-the james-harden-from-the-free-throw-line shell.
+the james-harden-from-three shell.
 
 very much still a WIP.
 
